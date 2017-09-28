@@ -1442,7 +1442,10 @@
       if (!slider.settings.infiniteLoop && slider.active.last) { return; }
 	  if (slider.working == true){ return ;}
       var pagerIndex = parseInt(slider.active.index) + 1;
+     //prevent clicks while slider is working.
+     if (!slider.working) {
       el.goToSlide(pagerIndex, 'next');
+     }
     };
 
     /**
@@ -1453,7 +1456,10 @@
       if (!slider.settings.infiniteLoop && slider.active.index === 0) { return; }
 	  if (slider.working == true){ return ;}
       var pagerIndex = parseInt(slider.active.index) - 1;
-      el.goToSlide(pagerIndex, 'prev');
+	//prevent clicks wile slider is working
+      if (!slider.working) {
+      	el.goToSlide(pagerIndex, 'prev');
+       }
     };
 
     /**
