@@ -1333,13 +1333,15 @@
       position = {left: 0, top: 0},
       lastChild = null,
       lastShowingIndex, eq, value, requestEl;
+	    
+      // if plugin is currently in motion, ignore request
+      if (slider.working || slider.active.index === slider.oldIndex) { return; }
       // store the old index
       slider.oldIndex = slider.active.index;
       //set new index
       slider.active.index = setSlideIndex(slideIndex);
 
-      // if plugin is currently in motion, ignore request
-      if (slider.working || slider.active.index === slider.oldIndex) { return; }
+
       // declare that plugin is in motion
       slider.working = true;
 
@@ -1442,10 +1444,7 @@
       if (!slider.settings.infiniteLoop && slider.active.last) { return; }
 	  if (slider.working == true){ return ;}
       var pagerIndex = parseInt(slider.active.index) + 1;
-     //prevent clicks while slider is working.
-     if (!slider.working) {
       el.goToSlide(pagerIndex, 'next');
-     }
     };
 
     /**
@@ -1456,10 +1455,8 @@
       if (!slider.settings.infiniteLoop && slider.active.index === 0) { return; }
 	  if (slider.working == true){ return ;}
       var pagerIndex = parseInt(slider.active.index) - 1;
-	//prevent clicks wile slider is working
-      if (!slider.working) {
-      	el.goToSlide(pagerIndex, 'prev');
-       }
+      el.goToSlide(pagerIndex, 'prev');
+       
     };
 
     /**
